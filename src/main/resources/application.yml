@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: post.elk
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      group-id: post-elastic
+      auto-offset-reset: earliest
+kafka:
+  topic:
+    name: post-events
+server:
+  port: 8005
