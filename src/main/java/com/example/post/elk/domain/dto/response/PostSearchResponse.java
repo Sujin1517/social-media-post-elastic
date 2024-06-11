@@ -17,7 +17,7 @@ public record PostSearchResponse(
 ) {
     public static PostSearchResponse from(PostDocument post) {
         return new PostSearchResponse(
-                post.getId(),
+                post.getPostId(),
                 post.getUserId(),
                 post.getContent(),
                 post.getLikeNum(),

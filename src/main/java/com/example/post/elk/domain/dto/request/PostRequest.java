@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.UUID;
 
 public record PostRequest (
-        Long id,
+        Long postId,
         UUID userId,
         String content,
         Long likeNum,
@@ -18,7 +18,8 @@ public record PostRequest (
 ){
         public PostDocument toDocument() {
             return new PostDocument(
-                    id,
+                    null,
+                    postId,
                     userId,
                     content,
                     likeNum,

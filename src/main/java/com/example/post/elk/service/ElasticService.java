@@ -9,6 +9,7 @@ import java.util.List;
 public interface ElasticService {
     List<PostSearchResponse> searchPostsByContent(String req);
     void addPostData(PostRequest req);
+    void deletePostData(Long postId);
 
     void listener(KafkaStatus<PostRequest> status);
 }

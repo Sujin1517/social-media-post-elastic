@@ -18,17 +18,25 @@ public class ElasticServiceImpl implements ElasticService{
 
     @Override
     public List<PostSearchResponse> searchPostsByContent(String req) {
-        return postDocumentRepository.findByContent(req).stream().map(PostSearchResponse::from).toList();
+        return postDocumentRepository.findAllByContent(req).stream().map(PostSearchResponse::from).toList();
     }
 
     @Override
     public void addPostData(PostRequest req) {
-        postDocumentRepository.save(req.toDocument());
+        PostDocument post = req.toDocument();
+        postDocumentRepository.save(post);
     }
+
+    @Override
+    public void deletePostData(Long postId) {
+        postDocumentRepository.delete(postDocumentRepository.findByPostId(postId));
+    }
+
 
     @Override
     @KafkaListener(topics = "post-events")
     public void listener(KafkaStatus<PostRequest> status) {
+        System.out.println("kafka");
         switch (status.status()){
             case "insertPost" -> addPostData(status.data());
             case "deletePost" -> {}
